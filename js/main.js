@@ -6,4 +6,6 @@ $(document).ready(function(){
 
     $('.btn-floating').leanModal();
 
+    $('select').material_select();
+
 });
