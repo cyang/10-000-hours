@@ -45,3 +45,27 @@ h1{
     top: 50%;
     transform: translateY(+50%);
 }
+
+#todo {
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    position: absolute;
+    top: 0px;
+    width: 20%;
+}
+
+#todo:hover {
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    width: 35%;
+}
+
+.collapsible-body {
+    background-color: white;
+}

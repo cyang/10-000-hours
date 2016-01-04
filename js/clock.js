@@ -4,9 +4,17 @@ var o = { totalSec: 10000*60*60 };
 
 function loadSeconds() {
     o.totalSec = localStorage["seconds"];
+    displayTime(o);
 }
 
 loadSeconds();
+
+function displayTime(o){
+    $("#hours").html(thousandsSeparator(Math.floor(o.totalSec / 3600)));
+    $("#minutes").html(Math.floor(o.totalSec / 60) % 60);
+    $("#seconds").html(o.totalSec % 60);
+}
+
 
 // Call every second
 var timeInterval = setInterval(function(){myTimer(o)}, 1000);
@@ -16,13 +24,11 @@ var myTimer = function(o){
     localStorage["seconds"] = o.totalSec;
 
     o.totalSec--;
-    $("#hours").html(thousandsSeparator(Math.floor(o.totalSec / 3600)));
-    $("#minutes").html(Math.floor(o.totalSec / 60) % 60);
-    $("#seconds").html(o.totalSec % 60);
+    displayTime(o);
 }
 
 // Adds commas in thousands place using regex
-var thousandsSeparator = function(number){
+function thousandsSeparator(number){
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -35,4 +41,5 @@ $("#pause").on("click", function(){
         timeInterval = setInterval(function(){myTimer(o)}, 1000);
         $(this).html("Pause");
     }
+    $(this).trigger('create');
 });
