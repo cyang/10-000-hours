@@ -36,10 +36,11 @@ function thousandsSeparator(number){
 $("#pause").on("click", function(){
     if ($(this).html() === "Pause"){
         clearInterval(timeInterval);
-        $(this).html("Resume");
+        $(this).html("Resume in background");
+        $("#clockdiv div").addClass("pause")
     } else {
         timeInterval = setInterval(function(){myTimer(o)}, 1000);
         $(this).html("Pause");
+        $("#clockdiv div").removeClass("pause")
     }
-    $(this).trigger('create');
 });
