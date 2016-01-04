@@ -1,10 +1,16 @@
 {
     "name": "10,000 hours",
     "description": "For those who are in pursuit of the mastery of a skill.",
-    "version": "0.2",
+    "version": "1.0",
     "incognito": "split",
     "chrome_url_overrides": {
         "newtab": "index.html"
     },
+    "content_scripts": [
+        {
+            "js": ["jquery-1.11.3.min.js", "clock.js"],
+            "matches": [ "http://*/*", "https://*/*"]
+        }
+    ],
     "manifest_version": 2
 }
