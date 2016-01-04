@@ -3,7 +3,7 @@
 ## What is this repository for?
 This is a chrome extension made to track 10,000 hours of "deliberate practice" in a certain field.
 
-![Alt text](/path/to/img.jpg)
+![Alt text](https://github.com/cyang001/10-000-hours/blob/master/img/screen.png)
 
 ## How do I get set up?
 1.  Simply, on Google Chrome head to the url chrome://extensions/
