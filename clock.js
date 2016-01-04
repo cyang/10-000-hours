@@ -14,11 +14,16 @@ var timeInterval = setInterval(function(){myTimer(o)}, 1000);
 var myTimer = function(o){
     // Saves to local storage
     localStorage["seconds"] = o.totalSec;
-    
+
     o.totalSec--;
-    $("#hours").html(Math.floor(o.totalSec / 3600));
+    $("#hours").html(thousandsSeparator(Math.floor(o.totalSec / 3600)));
     $("#minutes").html(Math.floor(o.totalSec / 60) % 60);
     $("#seconds").html(o.totalSec % 60);
+}
+
+// Adds commas in thousands place using regex
+var thousandsSeparator = function(number){
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // Stop timer
