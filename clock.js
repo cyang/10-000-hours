@@ -17,7 +17,7 @@ $("#pause").on("click", function(){
         clearInterval(timeInterval);
         $(this).html("Resume");
     } else {
-        timeInterval;
+        timeInterval = setInterval(function(){myTimer(o)}, 1000);
         $(this).html("Pause");
     }
 });
