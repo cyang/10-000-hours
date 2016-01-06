@@ -6,11 +6,6 @@
     "chrome_url_overrides": {
         "newtab": "index.html"
     },
-    "content_scripts": [
-        {
-            "js": ["jquery-1.11.3.min.js", "clock.js"],
-            "matches": [ "http://*/*", "https://*/*"]
-        }
-    ],
+    
     "manifest_version": 2
 }

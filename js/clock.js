@@ -3,7 +3,7 @@ var o = { totalSec: 10000*60*60 };
 
 
 function loadSeconds() {
-    o.totalSec = localStorage["seconds"];
+    if (localStorage["seconds"] != NaN){o.totalSec = localStorage["seconds"];}
     displayTime(o);
 }
 
