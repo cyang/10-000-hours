@@ -1,5 +1,3 @@
-var app = angular.module("app", []);
-
 $(document).ready(function(){
     $('.collapsible').collapsible({
       accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
@@ -11,17 +9,11 @@ $(document).ready(function(){
 });
 
 $("#createTask").submit(function(e){
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: "/create",
-        data: {"title": $("#title").val(), "color": $("#color").val(), "description": $("#description").val()},
-        dataType: "json",
-        success: function(response){
-            console.log("success");
-        },
-        error: function(response){
-            console.log("error");
-        }
-    });
+
+    $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + $("#color").val() + '"></i>' + $("#title").val() + '</div><div class="collapsible-body"><p>' + $("#description").val() + '</p></div></li>' );
+
+    $('#modal1').closeModal();
+
+    // Prevent refresh
+    return false;
 });
