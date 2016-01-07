@@ -6,10 +6,10 @@ function loadSeconds() {
 
     chrome.storage.sync.get('seconds', function (obj) {
         o.totalSec = obj["seconds"];
+        displayTime(o);
     });
-}
 
-loadSeconds();
+}
 
 function displayTime(o){
     $("#hours").html(thousandsSeparator(Math.floor(o.totalSec / 3600)));
@@ -17,15 +17,15 @@ function displayTime(o){
     $("#seconds").html(o.totalSec % 60);
 }
 
-
 // Call every second
 var timeInterval = setInterval(function(){myTimer(o)}, 1000);
 
-var myTimer = function(o){
+function myTimer(o){
+    o.totalSec--;
+
     // Saves to chrome storage
     chrome.storage.sync.set({'seconds': o.totalSec});
 
-    o.totalSec--;
     displayTime(o);
 }
 
@@ -33,6 +33,12 @@ var myTimer = function(o){
 function thousandsSeparator(number){
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+$(document).ready(function(){
+    loadSeconds();
+
+    myTimer();
+});
 
 // Stop timer
 $("#pause").on("click", function(){
