@@ -3,8 +3,10 @@ var o = { totalSec: 10000*60*60 };
 
 
 function loadSeconds() {
-    if (localStorage["seconds"] != NaN){o.totalSec = localStorage["seconds"];}
-    displayTime(o);
+
+    chrome.storage.sync.get('seconds', function (obj) {
+        o.totalSec = obj["seconds"];
+    });
 }
 
 loadSeconds();
@@ -20,8 +22,8 @@ function displayTime(o){
 var timeInterval = setInterval(function(){myTimer(o)}, 1000);
 
 var myTimer = function(o){
-    // Saves to local storage
-    localStorage["seconds"] = o.totalSec;
+    // Saves to chrome storage
+    chrome.storage.sync.set({'seconds': o.totalSec});
 
     o.totalSec--;
     displayTime(o);
