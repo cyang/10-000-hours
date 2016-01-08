@@ -11,12 +11,14 @@ $(document).ready(function(){
 });
 
 $("#createTask").submit(function(e){
-
     $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + $("#color").val() + '"></i>' + $("#title").val() + '</div><div class="collapsible-body"><p>' + $("#description").val() + '</p></div></li>' );
 
     $('#modal1').closeModal();
 
     updateTasks();
+
+    // Clear form inputs
+    $(this)[0].reset();
 
     // Prevent refresh
     return false;
