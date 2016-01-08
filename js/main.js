@@ -11,7 +11,7 @@ $(document).ready(function(){
 });
 
 $("#createTask").submit(function(e){
-    $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + $("#color").val() + '"></i>' + $("#title").val() + '</div><div class="collapsible-body"><p>' + $("#description").val() + '</p></div></li>' );
+    appendCollapsibleItem($("#color").val(), $("#title").val(), $("#description").val());
 
     $('#modal1').closeModal();
 
@@ -43,7 +43,11 @@ function updateTasks(){
 function loadTasks(){
     chrome.storage.sync.get('tasks', function (obj) {
         obj["tasks"].forEach(function(entry) {
-            $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + entry.color + '"></i>' + entry.title + '</div><div class="collapsible-body"><p>' + entry.description + '</p></div></li>' );
+            appendCollapsibleItem(entry.color, entry.title, entry.description);
         });
     });
+}
+
+function appendCollapsibleItem(color, title, description){
+    $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + color + '"></i>' + title + '<i class="fa fa-times right"></i></div><div class="collapsible-body"><p>' + description + '</p></div></li>' );
 }
