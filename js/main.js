@@ -6,6 +6,8 @@ $(document).ready(function(){
     $('.btn-floating').leanModal();
 
     $('select').material_select();
+
+    loadTasks();
 });
 
 $("#createTask").submit(function(e){
@@ -14,21 +16,29 @@ $("#createTask").submit(function(e){
 
     $('#modal1').closeModal();
 
+    updateTasks();
+
     // Prevent refresh
     return false;
 });
 
-function saveChanges() {
-        // Get a value saved in a form.
-        var theValue = textarea.value;
-        // Check that there's some code there.
-        if (!theValue) {
-          message('Error: No value specified');
-          return;
-        }
-        // Save it using the Chrome extension storage API.
-        chrome.storage.sync.set({'value': theValue}, function() {
-          // Notify that we saved.
-          message('Settings saved');
-        });
-      }
+function updateTasks(){
+    var task = {
+        title: $("#title").val(),
+        color: $("#color").val(),
+        description: $("#description").val()
+    };
+
+    var tasksList = [];
+    chrome.storage.sync.get('tasks', function (obj) {
+        tasksList = obj["tasks"];
+    });
+
+    tasksList.push(task);
+
+    chrome.storage.sync.set({'tasks': tasksList});
+}
+
+function loadTasks(){
+
+}

@@ -37,7 +37,7 @@ function thousandsSeparator(number){
 $(document).ready(function(){
     loadSeconds();
 
-    myTimer();
+    myTimer(o);
 });
 
 // Stop timer
