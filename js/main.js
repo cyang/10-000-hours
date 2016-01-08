@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    loadTasks();
+
     $('.collapsible').collapsible({
       accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });
@@ -6,8 +8,6 @@ $(document).ready(function(){
     $('.btn-floating').leanModal();
 
     $('select').material_select();
-
-    loadTasks();
 });
 
 $("#createTask").submit(function(e){
@@ -29,16 +29,19 @@ function updateTasks(){
         description: $("#description").val()
     };
 
-    var tasksList = [];
     chrome.storage.sync.get('tasks', function (obj) {
-        tasksList = obj["tasks"];
+        obj['tasks'].push(task);
+
+        chrome.storage.sync.set(obj, function(){
+            console.log("Saved a new array item");
+        });
     });
-
-    tasksList.push(task);
-
-    chrome.storage.sync.set({'tasks': tasksList});
 }
 
 function loadTasks(){
-
+    chrome.storage.sync.get('tasks', function (obj) {
+        obj["tasks"].forEach(function(entry) {
+            $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + entry.color + '"></i>' + entry.title + '</div><div class="collapsible-body"><p>' + entry.description + '</p></div></li>' );
+        });
+    });
 }
