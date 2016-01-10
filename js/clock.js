@@ -22,10 +22,6 @@ var timeInterval = setInterval(function(){myTimer(o)}, 1000);
 
 function myTimer(o){
     o.totalSec--;
-
-    // Saves to chrome storage
-    chrome.storage.sync.set({'seconds': o.totalSec});
-
     displayTime(o);
 }
 
@@ -46,6 +42,9 @@ $("#pause").on("click", function(){
         clearInterval(timeInterval);
         $(this).html("Resume in background");
         $("#clockdiv div").addClass("pause")
+        // Saves to chrome storage
+        chrome.storage.sync.set({'seconds': o.totalSec});
+        console.log("Saved");
     } else {
         timeInterval = setInterval(function(){myTimer(o)}, 1000);
         $(this).html("Pause");

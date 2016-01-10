@@ -10,6 +10,12 @@ $(document).ready(function(){
     $('select').material_select();
 });
 
+$(window).unload(function(){
+    // Saves to chrome storage
+    chrome.storage.sync.set({'seconds': o.totalSec});
+    console.log("Saved");
+});
+
 $("#createTask").submit(function(e){
     appendCollapsibleItem($("#color").val(), $("#title").val(), $("#description").val());
 
@@ -44,10 +50,15 @@ function loadTasks(){
     chrome.storage.sync.get('tasks', function (obj) {
         obj["tasks"].forEach(function(entry) {
             appendCollapsibleItem(entry.color, entry.title, entry.description);
+            loadRemoveSelect();
         });
     });
 }
 
 function appendCollapsibleItem(color, title, description){
-    $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + color + '"></i>' + title + '<i class="fa fa-times right"></i></div><div class="collapsible-body"><p>' + description + '</p></div></li>' );
+    $("#todo ul").append( '<li><div class="collapsible-header"><i class="fa fa-circle-o" style="color: ' + color + '"></i>' + title + '</div><div class="collapsible-body"><p>' + description + '</p></div></li>' );
+}
+
+function loadRemoveSelect(){
+    $("#removeSelect").append('<option value="1">Option 1</option>');
 }
